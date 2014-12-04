@@ -1,0 +1,26 @@
+{# Omit labels from form rows. #}
+{% block form_row -%}
+    <div class="row">
+        {{ form_widget(form) }}
+        {{ form_errors(form) }}
+    </div>
+{%- endblock form_row %}
+
+{# Use labels as placeholder text. #}
+{% use 'form_div_layout.html.twig' %}
+{% block widget_attributes %}
+    {% spaceless %}
+        {% set attr = attr|merge({'placeholder': label}) %}
+        {{ parent() }}
+    {% endspaceless %}
+{% endblock widget_attributes %}
+
+{% block form_errors -%}
+    {% if errors|length > 0 -%}
+        <ul class="error">
+            {%- for error in errors -%}
+                <li>{{ error.message }}</li>
+            {%- endfor -%}
+        </ul>
+    {%- endif %}
+{%- endblock form_errors %}

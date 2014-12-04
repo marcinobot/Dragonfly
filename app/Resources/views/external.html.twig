@@ -1,0 +1,84 @@
+{% extends "::base.html.twig" %}
+
+{%  block meta %}
+    {{ parent() }}
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+{%  endblock %}
+
+{% block stylesheets %}
+    {% stylesheets
+        'css/bootstrap.min.css'
+        'css/jumbotron-narrow.css' %}
+
+        <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+{% endblock %}
+
+{% if form is defined %}
+    {%- form_theme form ':Form:externalFormFields.html.twig' -%}
+{% endif %}
+
+{% block body %}
+<div class="container">
+    {% block innerBody %}
+
+        {% block header %}
+            <div class="header">
+                <nav>
+                    <ul class="nav nav-pills pull-right">
+                        {% set homeRoute = 'fos_user_security_login' %}
+                        {% set registerRoute = 'fos_user_registration_register' %}
+
+                        <li role="presentation" class="{% if app.request.attributes.get('_route') == homeRoute %}active{% endif %}">
+                            <a href="{{ path(homeRoute) }}">Home</a>
+                        </li>
+                        <li role="presentation" class="{% if app.request.attributes.get('_route') == registerRoute %}active{% endif %}">
+                            <a href="{{ path(registerRoute) }}">Register</a>
+                        </li>
+                    </ul>
+                </nav>
+                <h3 class="text-muted">Our New Project</h3>
+            </div>
+        {% endblock %}
+
+        {% block content %}
+            <div class="jumbotron">
+                <h1>Your Great Opportunity</h1>
+                <p class="lead"></p>
+                <p><a class="btn btn-lg btn-success" href="{{ path('fos_user_registration_register') }}" role="button">Sign up today</a></p>
+            </div>
+
+            <div class="row marketing">
+                <div class="col-lg-6">
+                    <h4>Subheading</h4>
+                    <p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
+
+                    <h4>Subheading</h4>
+                    <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.</p>
+
+                    <h4>Subheading</h4>
+                    <p>Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
+                </div>
+            </div>
+        {% endblock %}
+
+        {% block footer %}
+            <footer class="footer">
+                <p>&copy; Dragonfly {{ "now"|date('Y') }}</p>
+            </footer>
+        {% endblock %}
+
+    {% endblock %}
+</div>
+{% endblock %}
+
+
+{% block javascripts %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    {% javascripts
+        'js/bootstrap.min.js'
+        'js/ie10-viewport-workaround.js' %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}

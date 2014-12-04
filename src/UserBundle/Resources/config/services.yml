@@ -1,0 +1,13 @@
+services:
+    fos_user.registration.form.type:
+        class: UserBundle\Form\Type\Registration
+        arguments: [%fos_user.model.user.class%]
+        tags:
+            - { name: form.type, alias: user_registration }
+
+    user.login_success_handler:
+        class: UserBundle\Handler\LoginSuccessHandler
+        arguments:
+            - @router
+            - @security.context
+            - @service_container

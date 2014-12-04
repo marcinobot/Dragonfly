@@ -1,0 +1,3 @@
+{% if not object.enabled %}
+<a class="btn btn-warning btn-xs" href="{{ admin.generateObjectUrl('approve', object) }}">approve</a>
+{% endif %}

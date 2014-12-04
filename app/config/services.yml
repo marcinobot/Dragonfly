@@ -1,0 +1,8 @@
+services:
+    user.approval.email:
+        class: Dragonfly\Object\Email
+        arguments:
+            - @swiftmailer.mailer.transport.mandrill
+            - @twig
+            - %site_name%
+            - %sender_email_address%
